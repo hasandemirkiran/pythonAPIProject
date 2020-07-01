@@ -1,0 +1,143 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "description": "Hasan Demirkiran",
+    "version": "1.0.0",
+    "title": "Album Rest API Project"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Requests",
+      "description": "Example API for requesting Users and Albums"
+    }
+  ],
+  "paths": {
+    "/Users": {
+      "get": {
+        "tags": [
+          "User List Request"
+        ],
+        "summary": "Returns user list",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/components/schemas/userRequest"
+            }
+          }
+        }
+      }
+    },
+    "/Albums": {
+      "get": {
+        "tags": [
+          "Album Request"
+        ],
+        "summary": "Returns album list",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#" 
+            }
+          }
+        }
+      }
+    },
+    "/Users/{userId}/albums": {
+      "parameters": [
+        {
+          "name": "userId",
+          "in": "path",
+          "required": true,
+          "description": "ID of the cat that we want to match",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "Album Request by userID"
+        ],
+        "summary": "Get album request with given ID",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "userId",
+            "required": true,
+            "description": "user id",
+            "schema": {
+              "$ref": "#"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#"
+            }
+          },
+          "400": {
+            "description": "Failed. Misunderstood Request."
+          },
+          "404": {
+            "description": "Failed. Book request not found."
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "id": {
+        "properties": {
+          "uuid": {
+            "type": "string"
+          }
+        }
+      },
+      "userRequest": {
+        "type": "object",
+        "properties":   {
+          "id": "int",
+          "name": "string",
+          "username": "string",
+          "email": "email",
+          "address": {
+            "street": "string",
+            "suite": "string",
+            "city": "string",
+            "zipcode": "string",
+            "geo": {
+              "lat": "string",
+              "lng": "string"
+            }
+          },
+          "phone": "string",
+          "website": "string",
+          "company": {
+            "name": "string",
+            "catchPhrase": "string",
+            "bs": "string"
+          }
+        }
+      },
+      "userRequests": {
+        "type": "object",
+        "properties": {
+          "userRequest": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/userRequest"
+            }
+          }
+        }
+      }
+    }
+  }
+}
